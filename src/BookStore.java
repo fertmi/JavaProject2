@@ -22,6 +22,10 @@ public class BookStore {
             System.out.println("Неверный индекс");
         }else{
             this.books[index]= null;
+            for (int i=index; i<this.books.length-1;i++){
+                this.books[i]=this.books[i+1];
+                this.books[i+1] = null;
+            }
         }
     }
 
@@ -74,7 +78,15 @@ public class BookStore {
         }
     }
     public void searchBookByTitle(String title){
-
+        boolean find = false;
+        for (int i=0; i < this.books.length; i++){
+            if (this.books[i] != null && title.equals(this.books[i].getTitle())){
+                this.books[i].displayInfo();
+                System.out.println("");
+                find = true;
+                break;
+            }
+        }if (!find) System.out.println("Книга не найдена");
     }
 
     public void sortBooksByPrice(){
@@ -90,8 +102,8 @@ public class BookStore {
     }
 
     public void displayMenu(){
-            System.out.println("Добро пожаловать в книжный магазин!");
             System.out.println();
+            System.out.println("Добро пожаловать в книжный магазин!");
             System.out.println("Выберите интересующий Вас пункт меню:");
             System.out.println("1 Добавить книгу");
             System.out.println("2 Удалить книгу");

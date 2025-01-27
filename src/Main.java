@@ -17,6 +17,16 @@ public class Main {
             switch (input) {
                 case 1:
                     System.out.println("Добавить книгу");
+                    System.out.print("Введите название: ");
+                    String scanTitle = scanner.next();
+                    System.out.print("\nВведите автора: ");
+                    String scanAuthor = scanner.next();
+                    System.out.print("\nВведите цену: ");
+                    int scanPrice = scanner.nextInt();
+                    System.out.print("\nВведите количество: ");
+                    int scanQuant = scanner.nextInt();
+                    Book book_add = new Book(scanTitle, scanAuthor, scanPrice, scanQuant);
+                    book_store.addBook(book_add);
                     break;
                 case 2:
                     System.out.print("Введите индекс: ");
@@ -33,7 +43,7 @@ public class Main {
                 case 4:
                     System.out.print("Поиск книги по названию. Введите название: ");
                     String textTitle = scanner.next();
-                    search(textTitle, books);
+                    book_store.searchBookByTitle(textTitle);
                     break;
                 case 5:
                     System.out.println("Сортировка книг по цене");
@@ -47,16 +57,5 @@ public class Main {
                     break;
             }
         }while(input < 1 || input < 7);
-    }
-    private static void search(String title, Book[] books){
-        boolean find = false;
-        for (int i=0; i < books.length; i++){
-            if (books[i] != null && title.equals(books[i].getTitle())){
-                books[i].displayInfo();
-                System.out.println("");
-                find = true;
-                break;
-            }
-        }if (!find) System.out.println("Книга не найдена");
     }
 }
